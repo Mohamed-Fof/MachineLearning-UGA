@@ -1,5 +1,5 @@
 # Prédiction du Risque de Défaut de Crédit
-### Classification Supervisée 
+### Classification Supervisée — Naïve Bayes vs Régression Logistique
 
 > **Projet de Compléments de Mathématiques — L3 MIASHS**  
 > Auteurs : Mohamed FOFANA · Abdou FALL  
@@ -60,14 +60,15 @@ Les résultats sont présentés via une **application web interactive Shiny** pe
 Projet/
 ├── app.R                       # Application Shiny (UI + Server)
 ├── credit_risk_dataset.csv     # Jeu de données brut
-├── modele_nb.rds               # Modèle Naïve Bayes entraîné (généré par ProjetCompltMaths.R)
-├── modele_logit.rds            # Modèle Régression Logistique entraîné (généré par ProjetCompltMaths.R)
+├── modele_nb.rds               # Modèle Naïve Bayes entraîné
+├── modele_logit.rds            # Modèle Régression Logistique entraîné
 ├── ProjetCompltMaths.R         # Script R principal (entraînement + évaluation des modèles)
 ├── ProjetCompltMaths.Rmd       # Rapport R Markdown
 ├── ProjetCompltMaths.pdf       # Rapport compilé (PDF)
-├── ProjetCompltMaths.html      # Rapport compilé (HTML)
-├── .gitignore                  # Fichiers exclus du versionnement
-└── README.md                   # Ce fichier
+├── Dockerfile                  # Image Docker pour le déploiement
+├── shiny-server.conf           # Configuration du serveur Shiny
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -96,10 +97,10 @@ install.packages(c(
 
 ```r
 # 1. Cloner le dépôt
-# git clone https://github.com/<votre-compte>/<votre-repo>.git
+# git clone https://github.com/Mohamed-Fof/MachineLearning-UGA.git
 
-# 2. Générer les modèles (si modele_nb.rds et modele_logit.rds sont absents)
-source("ProjetCompltMaths.R")
+# 2. Générer les modèles si absents
+# source("ProjetCompltMaths.R")
 
 # 3. Lancer l'application
 shiny::runApp("app.R")
@@ -124,19 +125,19 @@ La **régression logistique** obtient de meilleures performances globales, notam
 
 ## Déploiement
 
-L'application est déployable sur [shinyapps.io](https://www.shinyapps.io) via le package `rsconnect` :
+L'application est déployée via **Docker sur [Render.com](https://render.com)** avec déploiement continu depuis GitHub.
 
-```r
-install.packages("rsconnect")
-rsconnect::setAccountInfo(
-  name   = "<votre-compte>",
-  token  = "<votre-token>",
-  secret = "<votre-secret>"
-)
-rsconnect::deployApp()
+### Lancer avec Docker en local
+
+```bash
+docker build -t credit-risk-app .
+docker run -p 3838:3838 credit-risk-app
+# Accès : http://localhost:3838/app/
 ```
 
-Voir la section déploiement dans le guide ci-dessous pour plus de détails.
+### Re-déployer
+
+Chaque `git push` sur la branche `main` déclenche automatiquement un nouveau build sur Render.
 
 ---
 
