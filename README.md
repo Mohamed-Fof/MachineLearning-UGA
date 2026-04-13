@@ -1,5 +1,5 @@
 # Prédiction du Risque de Défaut de Crédit
-### Classification Supervisée — Naïve Bayes vs Régression Logistique
+### Classification Supervisée 
 
 > **Projet de Compléments de Mathématiques — L3 MIASHS**  
 > Auteurs : Mohamed FOFANA · Abdou FALL  
