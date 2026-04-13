@@ -142,4 +142,4 @@ Voir la section déploiement dans le guide ci-dessous pour plus de détails.
 
 ## Licence
 
-Projet académique — L3 MIASHS, Université Paul Valéry Montpellier 3. Usage personnel et éducatif uniquement.
+Projet académique — L3 MIASHS, Université Grenoble Alpes (UGA). Usage personnel et éducatif uniquement.
