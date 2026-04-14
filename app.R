@@ -8,12 +8,8 @@ library(rpart)
 library(glmnet)
 library(naivebayes)
 
-# --- 1. CHARGEMENT DES DONNÉES ET MODÈLES ---
-# Modèles
-modele_nb <- readRDS("modele_nb.rds")
-modele_logit <- readRDS("modele_logit.rds")
-
-# Données brutes pour l'exploration
+# --- 1. CHARGEMENT DES DONNÉES ---
+# Données brutes pour l'exploration (léger, chargé une fois)
 donnees <- read.csv("credit_risk_dataset.csv")
 donnees$risk_score <- donnees$loan_percent_income * donnees$loan_int_rate
 donnees$high_risk_grade <- as.factor(as.integer(donnees$loan_grade %in% c("D", "E", "F", "G")))
@@ -197,6 +193,10 @@ server <- function(input, output) {
   
   # --- Onglet 4 : Prédiction ---
   observeEvent(input$predict_btn, {
+    # Chargement des modèles uniquement à la demande (économie mémoire)
+    modele_nb    <- readRDS("modele_nb.rds")
+    modele_logit <- readRDS("modele_logit.rds")
+
     nouvelle_donnee <- data.frame(
       person_age = input$person_age,
       person_income = input$person_income,
