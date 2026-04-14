@@ -5,6 +5,8 @@
 > Auteurs : Mohamed FOFANA · Abdou FALL  
 > Année universitaire : 2025-2026
 
+**Application en ligne :** [https://credit-risk-app-c8ye.onrender.com](https://credit-risk-app-c8ye.onrender.com)
+
 ---
 
 ## Présentation
